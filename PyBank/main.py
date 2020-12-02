@@ -52,8 +52,8 @@ diffs = np.subtract(profit_2, profit_1)
 num_months = len(profit)
 profit_mean = round(np.mean(diffs),2)
 total = round(sum(profit), 2)
-great_increase = round(max(diffs))
-least_increase = round(min(diffs))
+great_increase = max(diffs)
+least_increase = min(diffs)
 
 # To get month corresponding to greatest and least differences, find index of greatest diff in the diffs array, convert it to int for use later.
 #  The result of np.where is a list, the index is at [0].   Use this index (+1) to find month in months list.
@@ -80,8 +80,8 @@ print("------------------")
 print ("Total Months: " + str(num_months))
 print("Total: $" + str (total))
 print("Average change $" + str(profit_mean))
-print("Greatest Increase in Profits: ($" + str(great_increase) + ")")
-print("Greatest Decrease in Profits: ($" + str(least_increase) + ")")
+print("Greatest Increase in Profits: " + str(great_month) + " ($" + str(great_increase) + ")")
+print("Greatest Decrease in Profits: " + str(least_month) + " ($" + str(least_increase) + ")")
 print("------------------")
  
 #write analysis to file
@@ -97,7 +97,7 @@ with open (out_path, 'w') as newfile:
     newfile.write ("Total Months: " + str(num_months))
     newfile.write("\nTotal: $" + str (total))
     newfile.write("\nAverage change $" + str(profit_mean))
-    newfile.write("\nGreatest Increase in Profits: ($" + str(great_increase) + ")")
-    newfile.write("\nGreatest Decrease in Profits: ($" + str(least_increase) + ")")
+    newfile.write("\nGreatest Increase in Profits: " + str(great_month) + " ($" + str(great_increase) + ")")
+    newfile.write ("\nGreatest Decrease in Profits: " + str(least_month) + " ($" + str(least_increase) + ")")
     newfile.write("\n\n------------------")
     
