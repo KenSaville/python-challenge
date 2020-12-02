@@ -53,7 +53,7 @@ with open (csvpath, newline="") as csvfile:
             votes[row[2]] +=1
         i += 1    
 
-print(votes)
+#print(votes)
 
 # the above worked.  Creating a dictionary with name:vote total
 
@@ -63,13 +63,38 @@ for name in candidates:
         winner = name
     else:
         winner = candidates[0]
-print(winner)
+#print(winner)
 
 vote_total = 0
 for name in votes:
     vote_total = vote_total + votes[name]
     
-print("vote total = " + str(vote_total))
+#print("vote total = " + str(vote_total))
+
+#calculate percents
+percents = {}
+for name in candidates:
+    percents[name] = round((votes[name]/vote_total* 100),2)
+#print(percents)
+
+# make a new dictionaty that has the name as key and the vote_total and percent as a list.
+#   to make it easier to accesss
+combined = {}
+for name in candidates:
+    combined[name] = [votes[name], percents[name]]
+
+#print (combined['Khan'][1])
+
+# print results to screen
+
+print ("Election Results:")
+print ("--------------------")
+print ("Total votes: " + str(vote_total))
+print ("-------------------")
+print(" Candidate   raw votes   percent") 
+print ("__________________________________")
+for name in candidates:
+    print(name + "\t\t" + str(combined[name][0])+ "\t\t" + str(combined[name][1]))
 
 
 #write analysis to file
