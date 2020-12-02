@@ -3,7 +3,7 @@
 import os
 import csv
 import numpy as np
-import pandas as pd
+#import pandas as pd
 
 csvpath = os.path.join("resources", "pybank_budget_data.csv")
 
@@ -66,15 +66,14 @@ least_diff_index = int(where_least_diff[0])
 
 #check index
 #print(great_diff_index)
- #find corresponding month in months list.  Need to add 1 because diffs array is offset from original list by 1 (because of above pop)
-
+ 
+#find corresponding month in months list.  Need to add 1 because diffs array is offset from original list by 1 (because of above pop)
 great_month = months[great_diff_index + 1]
-#print("great: " + great_month) 
-
-#print(great_diff_index)
+ 
+#find month corresponding to greatest decrease
 least_month = months[least_diff_index + 1]
-#print("least: " + least_month) 
 
+#display analysis to screen 
 print("------------------")
 print ("Financial Analysis")
 print("------------------")
@@ -85,3 +84,20 @@ print("Greatest Increase in Profits: ($" + str(great_increase) + ")")
 print("Greatest Decrease in Profits: ($" + str(least_increase) + ")")
 print("------------------")
  
+#write analysis to file
+
+out_path = os.path.join("analysis", "monthly_profits_losses.txt")
+
+with open (out_path, 'w') as newfile:
+
+    newfile.write("------------------\n")
+    newfile.write ("Financial Analysis\n")
+    newfile.write ("by K. Saville\n")
+    newfile.write("------------------\n\n")
+    newfile.write ("Total Months: " + str(num_months))
+    newfile.write("\nTotal: $" + str (total))
+    newfile.write("\nAverage change $" + str(profit_mean))
+    newfile.write("\nGreatest Increase in Profits: ($" + str(great_increase) + ")")
+    newfile.write("\nGreatest Decrease in Profits: ($" + str(least_increase) + ")")
+    newfile.write("\n\n------------------")
+    
