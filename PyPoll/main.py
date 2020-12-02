@@ -35,8 +35,43 @@ print(candidates)
 votes = {}
 for i in candidates:
     votes[i] = 0
-
 print (votes)
+
+#loop through file again, adding 1 to values when row[2] matches key.  
+# Could probably just made dictionary in first loop
+
+with open (csvpath, newline="") as csvfile:
+    votereader = csv.reader(csvfile, delimiter = ',')
+    print(votereader)
+
+# iterate through rows, skipping first (header) row. add first candidate t list,
+# then check to see if each additional candidate is in the list.  If not add it.
+    i = 1
+    
+    for row in votereader:
+        if i > 1:
+            votes[row[2]] +=1
+        i += 1    
+
+print(votes)
+
+# the above worked.  Creating a dictionary with name:vote total
+
+first_total = votes[candidates[0]]
+for name in candidates:
+    if votes[name] > first_total:
+        winner = name
+    else:
+        winner = candidates[0]
+print(winner)
+
+vote_total = 0
+for name in votes:
+    vote_total = vote_total + votes[name]
+    
+print("vote total = " + str(vote_total))
+
+
 #write analysis to file
 
 #out_path = os.path.join("analysis", "poll_results.txt")
