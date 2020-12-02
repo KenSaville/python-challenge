@@ -1,0 +1,19 @@
+
+
+Election Results:
+----------------------
+
+Total votes: 3521001
+----------------------
+Candidate	raw votes	percent
+
+Khan	2218231	63.0
+Correy	704200	20.0
+Li	492940	14.0
+O'Tooley	105630	3.0
+
+AND THE WINNER IS ...
+
+Khan
+
+Who knew his wrath would pay off so well ?

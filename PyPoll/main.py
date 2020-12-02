@@ -29,13 +29,13 @@ with open (csvpath, newline="") as csvfile:
                 candidates.append(row[2]) 
         i += 1    
 
-print(candidates)
+#print(candidates)
 
 # create dictionary with key:value = candidates:votes, with votes starting at 0.
 votes = {}
 for i in candidates:
     votes[i] = 0
-print (votes)
+#print (votes)
 
 #loop through file again, adding 1 to values when row[2] matches key.  
 # Could probably just made dictionary in first loop
@@ -47,11 +47,10 @@ with open (csvpath, newline="") as csvfile:
 # iterate through rows, skipping first (header) row. add first candidate t list,
 # then check to see if each additional candidate is in the list.  If not add it.
     i = 1
-    
     for row in votereader:
         if i > 1:
             votes[row[2]] +=1
-        i += 1    
+        i += 1
 
 #print(votes)
 
@@ -68,7 +67,7 @@ for name in candidates:
 vote_total = 0
 for name in votes:
     vote_total = vote_total + votes[name]
-    
+
 #print("vote total = " + str(vote_total))
 
 #calculate percents
@@ -87,23 +86,40 @@ for name in candidates:
 
 # print results to screen
 
-print ("Election Results:")
-print ("--------------------")
+print ("\n\nElection Results:")
+print ("----------------------")
 print ("Total votes: " + str(vote_total))
-print ("-------------------")
-print(" Candidate   raw votes   percent") 
+print ("----------------------")
+print("Candidate"+ "\t" + "raw votes" + "\t" + "percent".expandtabs(30)) 
 print ("__________________________________")
 for name in candidates:
-    print(name + "\t\t" + str(combined[name][0])+ "\t\t" + str(combined[name][1]))
+    print(name + "\t" + str(combined[name][0])+ "\t" + str(combined[name][1]))
+
+print("\nAND THE WINNER IS ...\n\n" + winner)
+
+print("\nWho knew his wrath would pay off so well ?\n")
 
 
 #write analysis to file
 
-#out_path = os.path.join("analysis", "poll_results.txt")
+out_path = os.path.join("analysis", "poll_results.txt")
 
-#with open (out_path, 'w') as newfile:
+with open (out_path, 'w') as newfile:
 
- #   newfile.write("------------------\n")
-  #  newfile.write ("Election Results\n")
+    newfile.write ("\n\nElection Results:\n")
+    newfile.write ("----------------------")
+    newfile.write ("\n\nTotal votes: " + str(vote_total))
+    newfile.write ("\n----------------------")
+    newfile.write ("\nCandidate" + "\t" + "raw votes" + "\t" + "percent".expandtabs(30)) 
+    newfile.write ("\n\n")
+    for name in candidates:
+        newfile.write(name + "\t" + str(combined[name][0])+ "\t" + str(combined[name][1]) + "\n".expandtabs(30))
+
+    newfile.write ("\nAND THE WINNER IS ...\n\n" + winner)
+
+    newfile.write ("\n\nWho knew his wrath would pay off so well ?\n")
+
+
+
     
     
