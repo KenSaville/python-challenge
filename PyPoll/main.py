@@ -93,7 +93,7 @@ print ("----------------------")
 print("Candidate"+ "\t" + "raw votes" + "\t" + "percent".expandtabs(30)) 
 print ("__________________________________")
 for name in candidates:
-    print(name + "\t" + str(combined[name][0])+ "\t" + str(combined[name][1]))
+    print(name + "\t" + str(combined[name][0])+ "\t" + str(combined[name][1])
 
 print("\nAND THE WINNER IS ...\n\n" + winner)
 
