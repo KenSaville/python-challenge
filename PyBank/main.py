@@ -3,21 +3,24 @@
 import os
 import csv
 import numpy as np
-import pandas as pd
+#import pandas as pd
 
 csvpath = os.path.join("resources", "pybank_budget_data.csv")
 
 #initialize empty lists
+
 months = []
 profit = []
 profit_1 = []
 profit_2 = []
+
 
 # open pybank_budget file, create budget reader object
 
 with open (csvpath, newline="") as csvfile:
     budgetreader = csv.reader(csvfile, delimiter = ',')
     print(budgetreader)
+
 
 # iterate through rows, skipping first (header) row.  Make list of months and list of profits.  We make three lists. 1 - original profi/loss.  
 # profit_2 will have beginning value ;opped off, profit_1 will have end popped off.  This aligns 1st mth w 2nd month etc, 
@@ -52,8 +55,8 @@ diffs = np.subtract(profit_2, profit_1)
 num_months = len(profit)
 profit_mean = round(np.mean(diffs),2)
 total = round(sum(profit), 2)
-great_increase = round(max(diffs))
-least_increase = round(min(diffs))
+great_increase = max(diffs)
+least_increase = min(diffs)
 
 # To get month corresponding to greatest and least differences, find index of greatest diff in the diffs array, convert it to int for use later.
 #  The result of np.where is a list, the index is at [0].   Use this index (+1) to find month in months list.
@@ -66,22 +69,38 @@ least_diff_index = int(where_least_diff[0])
 
 #check index
 #print(great_diff_index)
- #find corresponding month in months list.  Need to add 1 because diffs array is offset from original list by 1 (because of above pop)
-
+ 
+#find corresponding month in months list.  Need to add 1 because diffs array is offset from original list by 1 (because of above pop)
 great_month = months[great_diff_index + 1]
-#print("great: " + great_month) 
-
-#print(great_diff_index)
+ 
+#find month corresponding to greatest decrease
 least_month = months[least_diff_index + 1]
-#print("least: " + least_month) 
 
+#display analysis to screen 
 print("------------------")
 print ("Financial Analysis")
 print("------------------")
 print ("Total Months: " + str(num_months))
 print("Total: $" + str (total))
 print("Average change $" + str(profit_mean))
-print("Greatest Increase in Profits: $" + str(great_increase) + ")")
-print("Greatest Decrease in Profits: $" + str(least_increase) + ")")
+print("Greatest Increase in Profits: " + str(great_month) + " ($" + str(great_increase) + ")")
+print("Greatest Decrease in Profits: " + str(least_month) + " ($" + str(least_increase) + ")")
 print("------------------")
  
+#write analysis to file
+
+out_path = os.path.join("analysis", "monthly_profits_losses.txt")
+
+with open (out_path, 'w') as newfile:
+
+    newfile.write("------------------\n")
+    newfile.write ("Financial Analysis\n")
+    newfile.write ("by K. Saville\n")
+    newfile.write("------------------\n\n")
+    newfile.write ("Total Months: " + str(num_months))
+    newfile.write("\nTotal: $" + str (total))
+    newfile.write("\nAverage change $" + str(profit_mean))
+    newfile.write("\nGreatest Increase in Profits: " + str(great_month) + " ($" + str(great_increase) + ")")
+    newfile.write ("\nGreatest Decrease in Profits: " + str(least_month) + " ($" + str(least_increase) + ")")
+    newfile.write("\n\n------------------")
+    
