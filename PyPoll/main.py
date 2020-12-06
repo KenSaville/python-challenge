@@ -85,20 +85,24 @@ for name in candidates:
 #print (combined['Khan'][1])
 
 # print results to screen
+ #f"{'Trades:':<15}{cnt:>10}",
+  #  f"\n{'Wins:':<15}{wins:>10}",
+  #  f"\n{'Losses:':<15}{losses:>10}",
+  #  f"\n{'Breakeven:':<15}{evens:>10}",
+  #  f"\n{'Win/Loss Ratio:':<15}{win_r:>10}",
 
-print ("\n\nElection Results:")
-print ("----------------------")
-print ("Total votes: " + str(vote_total))
-print ("----------------------")
-print("Candidate"+ "\t" + "raw votes" + "\t" + "percent".expandtabs(30)) 
+print (f"{'Election Results:':<20}")
+print ("---------------------------------")
+#print (f"{'Total votes:':<20}{str(vote_total):^10}")
+#print ("---------------------------------")
+print(f"{'Candidate':<10}{'votes':^10}{'percent':>10}") 
 print ("__________________________________")
-for name in candidates:
-    print(name + "\t" + str(combined[name][0])+ "\t" + str(combined[name][1])
+for name in combined:
+    print(f"{name:<10}{str(combined[name][0]):^10}{str(combined[name][1]):>10}")
 
 print("\nAND THE WINNER IS ...\n\n" + winner)
 
 print("\nWho knew his wrath would pay off so well ?\n")
-
 
 #write analysis to file
 
@@ -110,10 +114,10 @@ with open (out_path, 'w') as newfile:
     newfile.write ("----------------------")
     newfile.write ("\n\nTotal votes: " + str(vote_total))
     newfile.write ("\n----------------------")
-    newfile.write ("\nCandidate" + "\t" + "raw votes" + "\t" + "percent".expandtabs(30)) 
+    newfile.write ("\nCandidate" + "\t" + "raw votes" + "\t" + "percent") 
     newfile.write ("\n\n")
-    for name in candidates:
-        newfile.write(name + "\t" + str(combined[name][0])+ "\t" + str(combined[name][1]) + "\n".expandtabs(30))
+    for name in combined:
+        newfile.write(f"{name:<10}{str(combined[name][0]):^10}{str(combined[name][1]):>10}\n")
 
     newfile.write ("\nAND THE WINNER IS ...\n\n" + winner)
 

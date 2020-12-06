@@ -8,16 +8,19 @@ import numpy as np
 csvpath = os.path.join("resources", "pybank_budget_data.csv")
 
 #initialize empty lists
+
 months = []
 profit = []
 profit_1 = []
 profit_2 = []
+
 
 # open pybank_budget file, create budget reader object
 
 with open (csvpath, newline="") as csvfile:
     budgetreader = csv.reader(csvfile, delimiter = ',')
     print(budgetreader)
+
 
 # iterate through rows, skipping first (header) row.  Make list of months and list of profits.  We make three lists. 1 - original profi/loss.  
 # profit_2 will have beginning value ;opped off, profit_1 will have end popped off.  This aligns 1st mth w 2nd month etc, 
